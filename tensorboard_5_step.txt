@@ -1,0 +1,13 @@
+1. From TF Graph, decide which tensors you want to log 
+  W2_hist = tf.summary.histogram("weights2", W2) 
+  Cost_sum = tf.summary.scalar("cost", cost) 
+2. Merge all summaries 
+  Summary = tf.summary.merge_all() 
+3. Create writer and add graph 
+  Writer = tf.summary.FilterWriter("./logs") 
+  Writer.add_graph(sess.graph) 
+4. Run summary merge and add_summary 
+  S, _ = sess.run([summary, optimizer], feed_dict=feed_dict_ 
+  Writer.add_summary(s, global_step= global_step) 
+5.Launch Tensorboard
+  $tensorboard  -?logdir=./logs 

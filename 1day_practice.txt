@@ -1,0 +1,11 @@
+import numpy as np 
+
+x1 = np.array([[100,2,3,4],
+ [500,6,7,8],
+ [900,10,11,12]]) 
+
+def Standardize(x):
+    x[:,0] = (x[:,0] - x[:,0].mean())/x[:,0].std()
+    return x 
+
+print(Standardize(x1))

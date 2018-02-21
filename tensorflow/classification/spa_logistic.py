@@ -39,8 +39,9 @@ for step in range(2001):
 print('-----------------------------------------')
 print(sess.run(hypothesis, feed_dict={X: [[1,-1.8002628,3.61,3.]]}) > 0.5)
 
-correct_prediction = tf.equal(tf.argmax(hypothesis, 1), tf.argmax(Y, 1))
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-print(sess.run(accuracy, {X: x_data, Y: y_data}))
+predicted = tf.cast(hypothesis > 0.5, dtype=tf.float32)
+accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, Y)
+                                  ,dtype=tf.float32))
+print(sess.run(accuracy,feed_dict={X:x_data, Y:y_data} ))
 
 

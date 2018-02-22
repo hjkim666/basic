@@ -4,11 +4,7 @@ import random
 import matplotlib.pylab as plt
 tf.set_random_seed(777)
 
-flags = tf.app.flags
-FLAGS = flags.FLAGS
-flags.DEFINE_string('data_dir', './MNIST_data/', 'Directory for storing data')
-
-mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
+mnist = input_data.read_data_sets('./MNIST_data/', one_hot=True)
 
 sess = tf.InteractiveSession()
 
@@ -28,9 +24,9 @@ b3 = tf.Variable(tf.zeros([10]))
 
 dropout_rate = tf.placeholder(tf.float32)
 _L1 = tf.nn.relu(tf.matmul(X, W1) + b1)
-L1 = tf.nn.dropout(_L1, dropout_rate)
+L1 = tf.nn.dropout(_L1, keep_prob=dropout_rate)
 _L2 = tf.nn.relu(tf.matmul(L1, W2) + b2)
-L2 = tf.nn.dropout(_L2, dropout_rate)
+L2 = tf.nn.dropout(_L2, keep_prob=dropout_rate)
 hypothesis = tf.matmul(L2, W3) + b3
 
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=hypothesis, labels=Y)) 
